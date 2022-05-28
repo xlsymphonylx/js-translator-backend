@@ -19,10 +19,12 @@ const cookieExtractor = (
     req.path === "/register" ||
     req.path === "/translate";
   if (isAuthRoute) {
+    console.log("go ahead");
     return next();
   }
   if (!token) {
-    res.sendStatus(401);
+    console.log("401");
+    return res.sendStatus(401);
   }
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
     if (err) return res.sendStatus(403);
